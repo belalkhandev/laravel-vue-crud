@@ -19,11 +19,17 @@
 <body>
 
     <div class="container">
-        <h2>Laravel Vue Application</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jumbotron text-center">
+                    <h2>Laravel Vue Simple CRUD Application</h2>
+                </div>
+            </div>
+        </div>
     </div>
     
     <section id="app">
-        
+        <app-layout></app-layout>
     </section>
 
 

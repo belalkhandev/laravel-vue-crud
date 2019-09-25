@@ -1,32 +1,69 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+window.VueRouter = require('vue-router').default;
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+window.VueAxios = require('vue-axios').default;
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+window.Axios = require('axios').default;
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import AppLayout from './components/App.vue'
+import ListPosts from './components/ListPost'
+import AddPost from './components/AddPost'
+import EditPost from './components/EditPost'
+import ViewPost from './components/ViewPost'
+import DeletePost from './components/DeletePost'
 
-const app = new Vue({
+
+//registering modules
+Vue.use(VueRouter, VueAxios, axios);
+
+const routes = [
+    {
+        name: 'ListPosts',
+        path: '/',
+        component: ListPosts
+    },
+    {
+        name: 'AddPost',
+        path: '/add-post',
+        component: AddPost
+    },
+    {
+        name: 'EditPost',
+        path: '/edit-post/:id',
+        component: EditPost
+    },
+    {
+        name: 'DeletePost',
+        path: '/post-delete',
+        component: DeletePost
+    },
+    {
+        name: 'ViewPost',
+        path: '/view/:id',
+        component: ViewPost
+    }
+];
+
+
+const router = new VueRouter(
+    {
+        mode: 'history',
+        routes: routes
+    }
+);
+
+export const app = new Vue({
+    components: {
+        'app-layout': AppLayout, 
+        ListPosts, 
+        AddPost,
+        EditPost,
+        DeletePost,
+        ViewPost,
+    },
     el: '#app',
+    router,
 });
